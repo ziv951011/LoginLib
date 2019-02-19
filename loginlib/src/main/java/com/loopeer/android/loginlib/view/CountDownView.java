@@ -12,7 +12,7 @@ import android.widget.EditText;
 import com.loopeer.android.loginlib.utils.LoginLoader;
 import com.loopeer.android.loginlib.utils.VerifyUserLogImpl;
 
-public class CountDownView extends Button implements View.OnClickListener {
+public class CountDownView extends android.support.v7.widget.AppCompatButton implements View.OnClickListener {
 
     private MyCountTimer mMyCountTimer;
     private static int DEFAULT_COUNT_DOWN_TIME = 60;

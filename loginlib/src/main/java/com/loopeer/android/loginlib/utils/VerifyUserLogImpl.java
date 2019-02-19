@@ -12,10 +12,9 @@ public class VerifyUserLogImpl extends VerifyUser {
 
     @Override
     public boolean verifyPhoneOrEmail(String phoneOrEmail) {
-        boolean isFlag = StringUtils.isValidEmail(phoneOrEmail)
-                || StringUtils.isValidPhoneNumber(phoneOrEmail);
+        boolean isFlag =  StringUtils.isPhoneNumber(phoneOrEmail);
         if (!isFlag && isShowToast) {
-            ToastUtils.show(mContext, "账户格式错误");
+            ToastUtils.show(mContext, "手机号格式不正确");
         }
         return isFlag;
     }
