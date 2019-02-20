@@ -120,6 +120,13 @@ public class CountDownView extends android.support.v7.widget.AppCompatButton imp
         }
     }
 
+    /**
+     * 新增是否完成方法获取
+     */
+    public boolean getFlag() {
+        return flag;
+    }
+
     private LoginLoader.CaptchaListener mCaptchaListener;
 
     public void setCaptchaListener(LoginLoader.CaptchaListener captchaListener) {
