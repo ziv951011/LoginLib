@@ -3,6 +3,7 @@ package com.loopeer.android.loginlib.view;
 import android.content.Context;
 import android.os.CountDownTimer;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.loopeer.android.loginlib.utils.LoginLoader;
+import com.loopeer.android.loginlib.utils.Myutils;
+import com.loopeer.android.loginlib.utils.ToastUtils;
 import com.loopeer.android.loginlib.utils.VerifyUserLogImpl;
 
 public class CountDownView extends android.support.v7.widget.AppCompatButton implements View.OnClickListener {
@@ -83,21 +86,22 @@ public class CountDownView extends android.support.v7.widget.AppCompatButton imp
         }
     }
 
+    /**
+     * 自动校验手机号码是否正确
+     * @return
+     */
     public boolean checkUser() {
-        boolean isVerify = new VerifyUserLogImpl(getContext(), true).verifyPhoneOrEmail(mUser);
-        return isVerify;
-
-        /*if (TextUtils.isEmpty(mUser)) {
-            ToastUtils.show(getContext(), "用户名不能为空");
-            return true;
+        if (TextUtils.isEmpty(mUser)) {
+            ToastUtils.show(getContext(), "手机号码不能为空");
+            return false;
         }
 
-        if (!Patterns.PHONE.matcher(mUser).matches()
-                && !Patterns.EMAIL_ADDRESS.matcher(mUser).matches()) {
-            ToastUtils.show(getContext(), "格式错误");
+        if (Myutils.isPhoneNumber(mUser)) {
             return true;
+        } else {
+            ToastUtils.show(getContext(), "手机号码格式不正确！");
+            return false;
         }
-        return false;*/
     }
 
     class MyCountTimer extends CountDownTimer {
@@ -118,13 +122,6 @@ public class CountDownView extends android.support.v7.widget.AppCompatButton imp
             setText("重新发送");
             CountDownView.this.onComplete(mUser);
         }
-    }
-
-    /**
-     * 新增是否完成方法获取
-     */
-    public boolean getFlag() {
-        return flag;
     }
 
     private LoginLoader.CaptchaListener mCaptchaListener;
