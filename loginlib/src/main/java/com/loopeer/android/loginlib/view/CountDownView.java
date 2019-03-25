@@ -89,14 +89,14 @@ public class CountDownView extends android.support.v7.widget.AppCompatButton imp
      */
     public boolean checkUser() {
         if (TextUtils.isEmpty(mUser)) {
-            ToastUtils.show(getContext(), "手机号码不能为空");
+            mCaptchaListener.errorMsg("手机号码不能为空");
             return false;
         }
 
         if (Myutils.isPhoneNumber(mUser)) {
             return true;
         } else {
-            ToastUtils.show(getContext(), "手机号码格式不正确！");
+            mCaptchaListener.errorMsg("手机号码格式不正确");
             return false;
         }
     }

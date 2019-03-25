@@ -5,6 +5,7 @@ public class LoginLoader {
     public interface CaptchaListener {
         void onPre();
         void onComplete(String phoneOrEmail);
+        void errorMsg(String msg);
     }
 
     public interface SubmitListener {
