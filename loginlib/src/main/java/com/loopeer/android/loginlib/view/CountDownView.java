@@ -63,7 +63,6 @@ public class CountDownView extends android.support.v7.widget.AppCompatButton imp
         super.onAttachedToWindow();
     }
 
-    boolean flag = true;
 
     @Override
     protected void onDetachedFromWindow() {
@@ -79,15 +78,13 @@ public class CountDownView extends android.support.v7.widget.AppCompatButton imp
         if (mMyCountTimer == null) {
             mMyCountTimer = new MyCountTimer(DEFAULT_COUNT_DOWN_TIME * 1000, 1000);
         }
-
-        if (flag) {
-            mMyCountTimer.start();
-            onPre();
-        }
+        mMyCountTimer.start();
+        onPre();
     }
 
     /**
-     * 自动校验手机号码是否正确
+     * 校验机制 用户不用判断手机号码是否符合要求 内部执行处理
+     *
      * @return
      */
     public boolean checkUser() {
@@ -112,13 +109,11 @@ public class CountDownView extends android.support.v7.widget.AppCompatButton imp
 
         @Override
         public void onTick(long s) {
-            flag = false;
-            setText(s / 1000 + "秒");
+            setText(s / 1000 + "秒重新发送");
         }
 
         @Override
         public void onFinish() {
-            flag = true;
             setText("重新发送");
             CountDownView.this.onComplete(mUser);
         }
